@@ -1,0 +1,400 @@
+locals {
+  infra_specs = {
+    dev = {
+      small = {
+        # gke cluster details
+        node_machine_type = "custom-26-51200"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-6-14336"
+        postgres_attached_disk_size = "220"
+        pg_disk1 = "10G"
+        pg_disk2 = "120G"
+        pg_disk3 = "20G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+      }
+
+      custom = {
+        # gke cluster details
+        node_machine_type = var.node_machine_type
+        gke_num_nodes = var.gke_num_nodes
+
+        # Postgres Database server details
+        postgres_instance_type = var.postgres_instance_type
+        postgres_attached_disk_size = var.postgres_attached_disk_size
+        pg_disk1 = var.pg_disk1
+        pg_disk2 = var.pg_disk2
+        pg_disk3 = var.pg_disk3
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+    },
+
+    test = {
+      small = {
+        # gke cluster details
+        node_machine_type = "custom-26-51200"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-6-14336"
+        postgres_attached_disk_size = "220"
+        pg_disk1 = "10G"
+        pg_disk2 = "120G"
+        pg_disk3 = "20G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      custom = {
+        # gke cluster details
+        node_machine_type = var.node_machine_type
+        gke_num_nodes = var.gke_num_nodes
+
+        # Postgres Database server details
+        postgres_instance_type = var.postgres_instance_type
+        postgres_attached_disk_size = var.postgres_attached_disk_size
+        pg_disk1 = var.pg_disk1
+        pg_disk2 = var.pg_disk2
+        pg_disk3 = var.pg_disk3
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+      }
+    },
+
+    prod = {
+      small = {
+        # gke cluster details
+        node_machine_type = "custom-18-36864"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-6-14336"
+        postgres_attached_disk_size = "220"
+        pg_disk1 = "10G"
+        pg_disk2 = "120G"
+        pg_disk3 = "20G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      small-medium1 = {
+        # gke cluster details
+        node_machine_type = "custom-26-51200"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-8-24576"
+        postgres_attached_disk_size = "220"
+        pg_disk1 = "10G"
+        pg_disk2 = "120G"
+        pg_disk3 = "20G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      small-medium2 = {
+        # gke cluster details
+        node_machine_type = "custom-26-51200"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-8-24576"
+        postgres_attached_disk_size = "288"
+        pg_disk1 = "13G"
+        pg_disk2 = "157G"
+        pg_disk3 = "26G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      small-medium3 = {
+        # gke cluster details
+        node_machine_type = "custom-26-51200"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-8-24576"
+        postgres_attached_disk_size = "433"
+        pg_disk1 = "20G"
+        pg_disk2 = "236G"
+        pg_disk3 = "40G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      medium1 = {
+        # gke cluster details
+        node_machine_type = "custom-30-65536"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-10-43008"
+        postgres_attached_disk_size = "433"
+        pg_disk1 = "20G"
+        pg_disk2 = "236G"
+        pg_disk3 = "40G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      medium2 = {
+        # gke cluster details
+        node_machine_type = "custom-30-65536"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-10-43008"
+        postgres_attached_disk_size = "565"
+        pg_disk1 = "26G"
+        pg_disk2 = "308G"
+        pg_disk3 = "51G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      medium3 = {
+        # gke cluster details
+        node_machine_type = "custom-30-65536"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-10-43008"
+        postgres_attached_disk_size = "849"
+        pg_disk1 = "39G"
+        pg_disk2 = "463G"
+        pg_disk3 = "77G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      medium-large1 = {
+        # gke cluster details
+        node_machine_type = "custom-40-88064"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-18-63488"
+        postgres_attached_disk_size = "849"
+        pg_disk1 = "39G"
+        pg_disk2 = "463G"
+        pg_disk3 = "77G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      medium-large2 = {
+        # gke cluster details
+        node_machine_type = "custom-40-88064"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-18-63488"
+        postgres_attached_disk_size = "1323"
+        pg_disk1 = "50G"
+        pg_disk2 = "756G"
+        pg_disk3 = "126G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      medium-large3 = {
+        # gke cluster details
+        node_machine_type = "custom-40-88064"
+        gke_num_nodes = "1"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-18-63488"
+        postgres_attached_disk_size = "1852"
+        pg_disk1 = "50G"
+        pg_disk2 = "1058G"
+        pg_disk3 = "176G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      large1 = {
+        # gke cluster details
+        node_machine_type = "custom-30-67584"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-24-83968"
+        postgres_attached_disk_size = "1852"
+        pg_disk1 = "50G"
+        pg_disk2 = "1058G"
+        pg_disk3 = "176G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      large2 = {
+        # gke cluster details
+        node_machine_type = "custom-30-67584"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-24-83968"
+        postgres_attached_disk_size = "2596"
+        pg_disk1 = "50G"
+        pg_disk2 = "1483G"
+        pg_disk3 = "247G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      large3 = {
+        # gke cluster details
+        node_machine_type = "custom-30-67584"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-24-83968"
+        postgres_attached_disk_size = "3893"
+        pg_disk1 = "50G"
+        pg_disk2 = "2225G"
+        pg_disk3 = "371G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      extra-large1 = {
+        # gke cluster details
+        node_machine_type = "custom-40-90112"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-24-123904"
+        postgres_attached_disk_size = "3893"
+        pg_disk1 = "50G"
+        pg_disk2 = "2225G"
+        pg_disk3 = "371G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      extra-large2 = {
+        # gke cluster details
+        node_machine_type = "custom-40-90112"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-24-123904"
+        postgres_attached_disk_size = "4983"
+        pg_disk1 = "50G"
+        pg_disk2 = "2848G"
+        pg_disk3 = "475G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      extra-large3 = {
+        # gke cluster details
+        node_machine_type = "custom-40-90112"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-24-123904"
+        postgres_attached_disk_size = "8402"
+        pg_disk1 = "50G"
+        pg_disk2 = "4801G"
+        pg_disk3 = "800G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+
+      custom = {
+        # gke cluster details
+        node_machine_type = var.node_machine_type
+        gke_num_nodes = var.gke_num_nodes
+
+        # Postgres Database server details
+        postgres_instance_type = var.postgres_instance_type
+        postgres_attached_disk_size = var.postgres_attached_disk_size
+        pg_disk1 = var.pg_disk1
+        pg_disk2 = var.pg_disk2
+        pg_disk3 = var.pg_disk3
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+    },
+
+    preprod = {
+      small = {
+        # gke cluster details
+        node_machine_type = "custom-26-51200"
+        gke_num_nodes = "2"
+
+        # Postgres Database server details
+        postgres_instance_type = "custom-6-14336"
+        postgres_attached_disk_size = "220"
+        pg_disk1 = "10G"
+        pg_disk2 = "120G"
+        pg_disk3 = "20G"
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+
+      }
+
+      custom = {
+        # gke cluster details
+        node_machine_type = var.node_machine_type
+        gke_num_nodes = var.gke_num_nodes
+
+        # Postgres Database server details
+        postgres_instance_type = var.postgres_instance_type
+        postgres_attached_disk_size = var.postgres_attached_disk_size
+        pg_disk1 = var.pg_disk1
+        pg_disk2 = var.pg_disk2
+        pg_disk3 = var.pg_disk3
+        pg_version = "11"
+        pg_release = "15"
+        db_privileges = "SUPERUSER"
+      }
+    }
+  }
+}

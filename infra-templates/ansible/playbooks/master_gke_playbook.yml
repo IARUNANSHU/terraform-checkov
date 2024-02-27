@@ -1,0 +1,51 @@
+- name: Master xECM Playbook
+  hosts: localhost
+  gather_facts: no
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+
+    - name: ingress-nginx
+      include_role:
+        name: ingress-nginx
+      tags: ingress
+
+    - name: createtridentcvo
+      include_role:
+        name: createtridentcvo
+      tags: cvo
+
+    - name: trident
+      include_role:
+        name: trident
+      tags: trident
+
+    - name: prometheus
+      include_role:
+        name: prometheus
+      tags: prometheus
+
+#    - name: gke_dns_cname
+#      include_role:
+#        name: gke_dns_cname
+#      tags: dnscname
+
+    - name: sectigo
+      include_role:
+        name: sectigo
+      tags: sectigo
+
+    - name: universal_velero_install
+      include_role:
+        name: universal_velero_install
+      tags: velero
+
+    - name: cvs-nfs-driver
+      include_role:
+        name: cvs-nfs-driver
+      tags: cvs
+
+    - name: gcp-managed-prometheus
+      include_role:
+        name: gcp-managed-prometheus
+      tags: gmp

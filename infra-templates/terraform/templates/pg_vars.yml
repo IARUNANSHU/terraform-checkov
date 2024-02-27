@@ -1,0 +1,11 @@
+customer : ${local-file-customer}
+env : ${local-file-env}
+pg_host_name: ${local-file-pg_host_name}
+disk1 : ${local-file-disk1}
+disk2 : ${local-file-disk2}
+disk3 : ${local-file-disk3}
+disk4 : 100%FREE
+pg_version : ${local-file-pg_version}
+pg_release : ${local-file-pg_release}
+db_privileges : ${local-file-db_privileges}
+project_id: ${local-file-project_id}

@@ -1,0 +1,42 @@
+#Snapshot policy
+#each environment will have one snapshot policy
+#Prod envs get 30 days retention, everything else max 5 days
+resource "google_compute_resource_policy" "backup_prod" {
+  count = var.env == "prod"? 1 : 0
+  name = "${var.customer}-${var.env}"
+  snapshot_schedule_policy {
+    schedule {
+      hourly_schedule {
+        hours_in_cycle = 4
+        start_time    = "23:00"
+      }
+    }
+    retention_policy {
+      max_retention_days    = "30"
+      on_source_disk_delete = "KEEP_AUTO_SNAPSHOTS"
+    }
+    snapshot_properties {
+      storage_locations = [var.region]
+    }
+  }
+}
+
+resource "google_compute_resource_policy" "backup_non_prod" {
+  count = var.env == "prod"? 0 : 1
+  name = "${var.customer}-${var.env}"
+  snapshot_schedule_policy {
+    schedule {
+      daily_schedule {
+        days_in_cycle = 1
+        start_time    = "23:00"
+      }
+    }
+    retention_policy {
+      max_retention_days    = "5"
+      on_source_disk_delete = "KEEP_AUTO_SNAPSHOTS"
+    }
+    snapshot_properties {
+      storage_locations = [var.region]
+    }
+  }
+}

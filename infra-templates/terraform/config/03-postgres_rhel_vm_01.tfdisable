@@ -1,0 +1,78 @@
+# postgres variables
+#variable "postgres_ip_address" {}
+
+# module to create postgres VM
+
+module "postgres_VM" {
+  source = "git::https://gitlab.otxlab.net/ems_cloudops/terraform/gcp/modules/otc-ems-customer-server.git?ref=0.12.1"
+
+  instance_name = "gcp-${var.customer}dbp-${var.env_shortcodes[var.env]}01"
+  zone          = local.zonea
+  domain        = "com"
+  instance_type = local.infra_specs[var.env][var.deployment_size].postgres_instance_type
+  #ip_address    = var.postgres_ip_address
+  boot_disk = {
+    image = "rhel-7"
+    type  = var.env == "prod" ? "pd-ssd" : "pd-balanced"
+    size  = 40
+  }
+  attached_disks = [
+    {
+      size       = 17
+      type       = var.env == "prod" ? "pd-ssd" : "pd-balanced"
+      block_size = 4096
+      zone       = local.zonea
+    },
+    {
+      size          = local.infra_specs_db_total_disk_size.postgres_attached_disk_size
+      type          = var.env == "prod" ? "pd-ssd" : "pd-balanced"
+      block_size    = 4096
+      regional      = var.env == "prod" ? true : false
+      zone          = var.env == "prod" ? "" : local.zonea
+      replica_zones = var.env == "prod" ? [local.zonea, local.zoneb] : [""]
+    },
+  ]
+  subnetwork = {
+    name    = var.subnetwork
+    project = var.network_project_id
+  }
+  service_account_email = google_service_account.postgres_service_account.email
+  customer              = var.customer
+  env                   = var.env
+  metadata = {
+    startup-script-url = var.startup_script["lnx"]
+  }
+  snapshot_policy = "${var.customer}-${var.env}"
+  network_tags    = local.network_tags
+
+  depends_on = [google_compute_resource_policy.backup_prod,google_compute_resource_policy.backup_non_prod]
+}
+
+# Postgres VM service account
+
+resource "google_service_account" "postgres_service_account" {
+  project    = var.project
+  account_id = "gcp-${var.customer}dbp-${var.env_shortcodes[var.env]}01"
+}
+resource "google_project_iam_member" "object_viewer_postgres_service_account" {
+  project = var.project
+  role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${google_service_account.postgres_service_account.email}"
+}
+
+resource "google_project_iam_member" "object_viewer_emsproject_postgres_service_account" {
+  project = var.emsproject
+  role    = "roles/storage.objectViewer"
+  member  = "serviceAccount:${google_service_account.postgres_service_account.email}"
+}
+
+resource "google_project_iam_member" "log_writer_postgres_service_account" {
+  project = var.project
+  role    = "roles/logging.logWriter"
+  member  = "serviceAccount:${google_service_account.postgres_service_account.email}"
+}
+resource "google_project_iam_member" "metric_writer_postgres_service_account" {
+  project = var.project
+  role    = "roles/monitoring.metricWriter"
+  member  = "serviceAccount:${google_service_account.postgres_service_account.email}"
+}

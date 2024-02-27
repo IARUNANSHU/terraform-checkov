@@ -1,0 +1,2 @@
+[all_hosts]
+${local-file-pg_host_name}

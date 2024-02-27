@@ -1,0 +1,36 @@
+#Generic values
+zone: us-east4-a
+region: us-east4
+project_id: otc-ems-ce-dryrun1
+env: preprod
+customer: xecm8
+regional: false
+cluster_name: otc-ems-ce-dryrun1-xecm8
+product: xecm
+prometheus_ip: 10.212.178.238
+grafana_ip: 10.212.178.211
+alertmanager_ip: 10.212.178.239
+
+#createTridentCVO values
+cvo_required: false
+cvoSize: NA          # refer to https://confluence.opentext.com/x/ZIf3Hg to decide on the size
+cvoSubnet: NA
+cvoZone: NA
+
+#trident values
+trident_version: NA # should be 21.10.0 if k8s version is greater than 1.19
+upgrade_trident: NA   # true if you want to use this ansible playbook for trident 20.10.0 to 21.10.0 upgrade
+
+#gke_dns_cname values
+typeofdns: wildcard      # oob-non-wildcard, non-wildcard, wildcard
+
+#sectigo values
+typeofcert: wildcard             # oob-non-wildcard, non-wildcard, wildcard
+san_required: false         # true if you need to add a subject alternative name
+san_dns:                      # set this to the DNS if SAN required is yes
+
+cvs_server_ip: 10.183.64.4
+cvs_export_path: /xecm8-preprod
+csi_driver_nfs_version: v4.2.0
+sc_reclaim_policy: Retain
+sc_volume_binding_mode: Immediate

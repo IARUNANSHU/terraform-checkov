@@ -1,0 +1,20 @@
+.idea/*
+# Local Terraform key file
+**/terraform_key.json
+
+# Local .terraform directories
+**/**/.terraform/*
+
+# .tfstate files
+**/**/*.tfstate
+**/**/*.tfstate.*
+**/**/.terraform.lock.hcl
+
+# Crash log files
+crash.log
+
+.vscode
+
+infra-templates/ansible/playbooks/roles/**
+infra-templates/ansible/playbooks/postgres_playbook/**
+infra-templates/terraform/config/kubeconfig*

@@ -1,0 +1,36 @@
+#Generic values
+zone: ${local-file-zone}
+region: ${local-file-region}
+project_id: ${local-file-project_id}
+env: ${local-file-env}
+customer: ${local-file-customer}
+regional: ${local-file-regional}
+cluster_name: ${local-file-cluster_name}
+product: ${local_file_product}
+prometheus_ip: ${local_prometheus_ip}
+grafana_ip: ${local_grafana_ip}
+alertmanager_ip: ${local_alertmanager_ip}
+
+#createTridentCVO values
+cvo_required: ${local-file-cvo_required}
+cvoSize: ${local-file-cvoSize}          # refer to https://confluence.opentext.com/x/ZIf3Hg to decide on the size
+cvoSubnet: ${local-file-cvoSubnet}
+cvoZone: ${local-file-cvoZone}
+
+#trident values
+trident_version: ${local-file-trident_version} # should be 21.10.0 if k8s version is greater than 1.19
+upgrade_trident: ${local-file-upgrade_trident}   # true if you want to use this ansible playbook for trident 20.10.0 to 21.10.0 upgrade
+
+#gke_dns_cname values
+typeofdns: ${local-file-typeofdns}      # oob-non-wildcard, non-wildcard, wildcard
+
+#sectigo values
+typeofcert: ${local-file-typeofcert}             # oob-non-wildcard, non-wildcard, wildcard
+san_required: ${local-file-san_required}         # true if you need to add a subject alternative name
+san_dns: ${local-file-san_dns}                     # set this to the DNS if SAN required is yes
+
+cvs_server_ip: ${cvs_server_ip}
+cvs_export_path: ${cvs_export_path}
+csi_driver_nfs_version: ${csi_driver_nfs_version}
+sc_reclaim_policy: ${sc_reclaim_policy}
+sc_volume_binding_mode: ${sc_volume_binding_mode}
